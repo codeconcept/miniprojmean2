@@ -1,0 +1,20 @@
+<div class="col-sm-12">
+  <h2>Vidéos favorites</h2>
+  <div *ngFor="let fav of favorites">
+    
+    <div class="card card-block" class="col-sm-4">
+      <h4 class="card-title">{{ fav.title }}</h4>
+      <img [src]="fav.thumbnailDefaultUrl" alt="{{fav.title}}" class="fav-thumbnail">
+      <p class="card-text">{{fav.description}}</p>
+      <a href="{{fav.channelUrl}}" class="card-link" target="_blank">chaine YouTube</a>
+      <a href="{{fav.url}}" class="card-link" target="_blank">voir la vidéo</a>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="col-sm-12">
+  <h2>Données brutes</h2>
+  <div>{{ favorites | json }}</div>
+</div>>
