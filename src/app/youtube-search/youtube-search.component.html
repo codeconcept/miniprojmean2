@@ -2,7 +2,39 @@
   <div class="col-md-12">
     <h3>Recherche YouTube</h3>
     <input #searchterm placeholder="recherche YouTube">  
+
+    <button (click)="onClick()">Alert</button>
+
   </div>
+</div>
+
+<!--<div class="row">
+  <youtube-player
+            [videoId]="id"
+            (ready)="savePlayer($event)"
+            (change)="onStateChange($event)"
+          >
+  </youtube-player>
+</div>-->
+
+<!--<div id="myModal" class="modal fade">-->
+<div id="myModal" class="">  
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">YouTube Video</h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="cartoonVideo" 
+                  width="560" 
+                  height="315" 
+                  [src]="videoUrl" 
+                  frameborder="0" 
+                  allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -11,6 +43,7 @@
       <h3>{{video.snippet.title}}</h3>
       <img [src]="video.snippet.thumbnails.default.url" class="youtube-thumbnail"/>
       <p>{{video.snippet.description}}</p>
+      <button (click)="onClick(video.id.videoId)">lire</button>
     </div>
   </div>
 </div>
@@ -21,6 +54,7 @@
       <h3>{{video.snippet.title}}</h3>
       <img [src]="video.snippet.thumbnails.default.url" class="youtube-thumbnail"/>
       <p>{{video.snippet.description}}</p>
+      <button (click)="onClick()">lire</button>
     </div>
   </div>
 </div>

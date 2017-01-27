@@ -2,3 +2,11 @@
     float: left;
     margin-right: 5px;
 }
+
+.bs-example{
+    margin: 20px;
+}
+.modal-content iframe{
+    margin: 0 auto;
+    display: block;
+}
