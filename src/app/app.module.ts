@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { FavoriteListComponent } from './favorite-list/favorite-list.component';
 import { FavoriteService } from './services/favorite.service';
 import { HomeComponent } from './home/home.component';
+import { YoutubeSearchComponent } from './youtube-search/youtube-search.component';
+import { YoutubeService } from './youtube-search/youtube.service';
 
 const ROUTES = [
   {
@@ -24,7 +26,8 @@ const ROUTES = [
   declarations: [
     AppComponent,
     FavoriteListComponent,
-    HomeComponent
+    HomeComponent,
+    YoutubeSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [ FavoriteService ],
+  providers: [ FavoriteService, YoutubeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

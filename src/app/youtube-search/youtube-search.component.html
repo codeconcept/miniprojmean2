@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>Recherche YouTube</h3>
+    <input #searchterm placeholder="recherche YouTube">  
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <div *ngFor="let video of resultsFirstArray" class="col-md-4">
+      <h3>{{video.snippet.title}}</h3>
+      <img [src]="video.snippet.thumbnails.default.url" class="youtube-thumbnail"/>
+      <p>{{video.snippet.description}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="resultsSecondArray">
+  <div>
+    <div *ngFor="let video of resultsSecondArray" class="col-md-4">
+      <h3>{{video.snippet.title}}</h3>
+      <img [src]="video.snippet.thumbnails.default.url" class="youtube-thumbnail"/>
+      <p>{{video.snippet.description}}</p>
+    </div>
+  </div>
+</div>
