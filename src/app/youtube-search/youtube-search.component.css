@@ -1,3 +1,9 @@
+.one-result {    
+    margin-bottom: 15px;
+    min-height: 140px;
+    margin-top: 6px;
+}
+
 .youtube-thumbnail {
     float: left;
     margin-right: 5px;
@@ -9,4 +15,8 @@
 .modal-content iframe{
     margin: 0 auto;
     display: block;
+}
+
+.spacer {
+    min-height: 62px;
 }

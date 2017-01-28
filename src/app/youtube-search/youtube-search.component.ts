@@ -18,13 +18,10 @@ import { YoutubeService } from './youtube.service';
 export class YoutubeSearchComponent implements OnInit {
 
   @ViewChild('searchterm') searchterm:ElementRef;
-
   results: any[];
-  resultsFirstArray: any[];
-  resultsSecondArray: any[];
 
   // player
-  id = 'mOD2sGp4V8o';
+  id = ''; // 'mOD2sGp4V8o';
   private player;
   private ytEvent;
   dangerousVideoUrl: string;
@@ -57,17 +54,18 @@ export class YoutubeSearchComponent implements OnInit {
     console.log('term', term);
     this.yts.search(term.target.value).subscribe((data) => {
       console.log(data);
-      if(data.length > 3) {
-        this.resultsFirstArray = data.slice(0,3);
-        this.resultsSecondArray = data.slice(3);
-      } else {
-        this.resultsFirstArray = data;
-      }
+      this.results = data;
+      this.id = data[0].id.videoId;
+      this.updateVideoUrl(this.id);
     });
   }
 
   onClick(videoId: string) {
     this.updateVideoUrl(videoId);
+  }
+
+  addToFavorites(video: any) {
+    this.openModal();
   }
 
   updateVideoUrl(id: string) {
@@ -81,18 +79,33 @@ export class YoutubeSearchComponent implements OnInit {
   }
 
 
-  openPopup() {
+  openPopup(video: any) {
         this.modal.alert()
         .size('lg')
         .showClose(true)
-        .title('un titre')
+        .title(video.snippet.title)
         .body(`
-            <b>test !!!!!</b>
-            <div>
-                peut contenir du HTML
+            <div> 
+              <button>ajouter</button> &nbsp <button>annuler</button>
             </div>
             `)
         .open();
+  }
+
+  openModal() {
+    this.modal.prompt()
+    .size('lg')
+    .isBlocking(true)
+    .showClose(true)
+    .keyboard(27)
+    .title('Ajouter à mes fovoris')
+    .titleHtml('<h3>Ajouter cette vidéo à mes favoris</h3>')
+    .body('Commentaire facultatif ("à voir demain", "montrer à Sam"...)')
+    .bodyClass('modal-body')
+    .footerClass('modal-footer')
+    .okBtn('ajouter aux favoris')
+    .okBtnClass('btn btn-primary')
+    .open();
   }
 
 
