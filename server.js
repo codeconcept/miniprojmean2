@@ -7,8 +7,19 @@ const api = require('./server/routes/api');
 const app = express();
 
 // POST
+// // app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+var router = express.Router({
+  mergeParams: true
+})
+
+router.use(function (req, res, next) {
+  console.log(req.method, 'for', req.params.username, 'at', req.path)
+  next()
+})
+
 
 app.use(express.static(path.join(__dirname, 'dist')));
 

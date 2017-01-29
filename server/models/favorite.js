@@ -1,7 +1,6 @@
-var uri = 'mongodb://testuser:azerty123456@ds129179.mlab.com:29179/ytsearchplay';
-
+var constants = require('../constants');
 var mongoose = require('mongoose');
-mongoose.connect(uri);
+mongoose.connect(constants.MLAB_URI);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

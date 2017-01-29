@@ -9,6 +9,7 @@
         <p class="card-text">{{fav.description}}</p>
         <a href="{{fav.channelUrl}}" class="card-link" target="_blank">chaine YouTube</a>
         <a href="{{fav.url}}" class="card-link" target="_blank">voir la vidéo</a>
+        <a class="btn btn-xs btn-danger" (click)="deleteFavorite(fav._id)">supprimer</a>
       </div>
 
     </div>
@@ -22,3 +23,25 @@
     <div>{{ favorites | json }}</div>
   </div>
 </div>
+
+<div class="row">
+  <h3>Sandbox pour tester la création d'un nouveau favori en base !</h3>
+  <form method="post" #f="ngForm" (ngSubmit)="createFavorite(f.value)">
+    <input type="text" name="favtitle" id="favtitle" placeholder="titre" ngModel>
+    <input type="text" name="favdescription" id="favdescription" placeholder="description" ngModel>
+    <button type="submit">ajouter</button>
+  </form>
+</div>
+
+<!--url: String,
+title: String,
+description: String,
+category: String,
+channelTitle: String,
+chanelId: String,
+thumbnailDefaultUrl: String,
+channelUrl: String,
+duration: String,
+durationUnit: String,
+publishedAt: String,
+addedToFavoriteDate: String-->
