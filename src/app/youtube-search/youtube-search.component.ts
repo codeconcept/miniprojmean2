@@ -9,6 +9,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/do';
 
 import { YoutubeService } from './youtube.service';
+import {  FavoriteService } from '../services/favorite.service';
 
 @Component({
   selector: 'youtube-search',
@@ -29,7 +30,11 @@ export class YoutubeSearchComponent implements OnInit {
 
 
   constructor(public yts:YoutubeService, 
-                overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private sanitizer: DomSanitizer) {    
+                overlay: Overlay, 
+                vcRef: ViewContainerRef, 
+                public modal: Modal, 
+                private sanitizer: DomSanitizer,
+                private favoriteService: FavoriteService) {    
     overlay.defaultViewContainer = vcRef;  
   }
 
@@ -65,7 +70,7 @@ export class YoutubeSearchComponent implements OnInit {
   }
 
   addToFavorites(video: any) {
-    this.openModal();
+    this.openModal(video);
   }
 
   updateVideoUrl(id: string) {
@@ -92,7 +97,7 @@ export class YoutubeSearchComponent implements OnInit {
         .open();
   }
 
-  openModal() {
+  openModal(video: any) {
     this.modal.prompt()
     .size('lg')
     .isBlocking(true)
@@ -105,8 +110,39 @@ export class YoutubeSearchComponent implements OnInit {
     .footerClass('modal-footer')
     .okBtn('ajouter aux favoris')
     .okBtnClass('btn btn-primary')
-    .open();
+    .open()
+    .catch(err => { console.error(err); }) // catch error not related to the result (modal open...)
+    .then((dialog:any) => dialog.result) // dialog has more properties,lets just return the promise for a result. 
+    .then(result => { this.modalOk(result, video); }) // if ok was clicked.
+    .catch(err => { console.error(new Error('cancelled by user')); }); //was cancelled (click or non block click)
   }
+
+  modalOk(data, video){
+    // console.log(data, video);
+    if(data.trim() !== '') {
+      video.userDescription = data.trim();
+    }
+    this.favoriteService
+        .createFavorite(video)
+        .subscribe(
+          this.favoriteCreated,
+          this.favoriteCreatedError
+        );
+  }
+
+  modalError(err) {
+    console.error(err);
+  }
+
+  favoriteCreated(data) {
+    console.log('back from service');
+    console.log(data);
+  }
+
+  favoriteCreatedError(err) {
+    console.error(err);
+  }
+
 
 
 }

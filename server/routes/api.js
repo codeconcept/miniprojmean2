@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 const router = express.Router({
   mergeParams: true
 });
-// const bodyParser = require('body-parser');
-
 const Favorite = require('../models/favorite').Favorite;
 
 
@@ -23,16 +21,26 @@ router.get(favoritesURL, (req, res) => {
 mongoose.Promise = Promise;
 
 router.post(favoritesURL, (req, res) => {
-
+  console.log(req.body);
   const fav = new Favorite({
-    title: req.body.favtitle,
-    description: req.body.favdescription,
+    title: req.body.snippet.title,
+    description: req.body.snippetfavdescription,
+    userDescription: req.body.userDescription,
+    category: 'TODO add a drop down in the template',
+    channelTitle: req.body.snippet.channelTitle,
+    chanelId: req.body.snippet.chanelId,
+    thumbnailDefaultUrl: req.body.snippet.thumbnails.default.url,
+    channelUrl: 'https://www.youtube.com/channel/' + req.body.snippet.chanelId,
+    duration: 'TODO where is it?',
+    durationUnit: 'minutes',
+    publishedAt: req.body.snippet.publishedAt,
     addedToFavoriteDate: new Date()
   });
 
   Favorite.create(fav)
             .then(favorite => {
               console.log(favorite);
+              res.status(200).send({ result: 'ajoute avec succes' });
               // res.redirect(favoritesURL);
             })
             .catch(err => {

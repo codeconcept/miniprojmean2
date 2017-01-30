@@ -13,6 +13,7 @@ db.once('open', function (callback) {
 	"url": "https://youtu.be/eM31pqYXSIM",
 	"title": "Angular 2  tutoriel 8  en français : @Output decorator et EventEmitter",
   "description": "bla bla",
+  "userDescription": "cool cette video"
 	"category": "programmation",
 	"channelTitle": "codeconcept",
 	"chanelId": "UCY_guo_AYBs0cIkeMVc16iw",
@@ -29,6 +30,7 @@ var favoriteSchema = mongoose.Schema({
   url: String,
   title: String,
   description: String,
+  userDescription: String,
   category: String,
   channelTitle: String,
   chanelId: String,
