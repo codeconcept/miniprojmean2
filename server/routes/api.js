@@ -21,16 +21,17 @@ router.get(favoritesURL, (req, res) => {
 mongoose.Promise = Promise;
 
 router.post(favoritesURL, (req, res) => {
-  console.log(req.body);
+  console.log(req.body); 
   const fav = new Favorite({
     title: req.body.snippet.title,
-    description: req.body.snippetfavdescription,
+    description: req.body.snippet.description,
     userDescription: req.body.userDescription,
     category: 'TODO add a drop down in the template',
     channelTitle: req.body.snippet.channelTitle,
-    chanelId: req.body.snippet.chanelId,
+    chanelId: req.body.snippet.channelId,
     thumbnailDefaultUrl: req.body.snippet.thumbnails.default.url,
-    channelUrl: 'https://www.youtube.com/channel/' + req.body.snippet.chanelId,
+    videoId: req.body.id.videoId,
+    channelUrl: `https://www.youtube.com/channel/${req.body.snippet.channelId}`,
     duration: 'TODO where is it?',
     durationUnit: 'minutes',
     publishedAt: req.body.snippet.publishedAt,

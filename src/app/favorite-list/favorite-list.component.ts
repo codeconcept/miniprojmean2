@@ -35,10 +35,15 @@ export class FavoriteListComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data);
+            this.deleteFavoriteFromTemplate(favoriteId);
           },
           err => {
             console.log(err);
           }         
         );
+  }
+
+  deleteFavoriteFromTemplate(favoriteId) {
+    this.favorites = this.favorites.filter(f => f._id !== favoriteId);
   }
 }
